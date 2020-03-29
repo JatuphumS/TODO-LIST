@@ -1,0 +1,53 @@
+.create-card{
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    position: absolute;
+    z-index: 2100;
+    left: 50%;
+    margin: 0;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(0, 0, 0, .125);
+    box-shadow: 0 2px 0 rgba(90, 97, 105, .11), 0 4px 8px rgba(90, 97, 105, .12), 0 10px 10px rgba(90, 97, 105, .06), 0 7px 70px rgba(90, 97, 105, .1);
+    padding: 10px;
+    border-radius: 8px;
+    justify-content: flex-start;
+    margin: 15px;
+    background-color: #ffffff;
+}
+.list-card{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.buttonGroup{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #ffff;
+    margin: 20px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.create{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border-color: black;
+    width: 150px;
+}
+
+.cancel{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border-color: black;
+    width: 100px;
+}

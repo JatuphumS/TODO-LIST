@@ -1,0 +1,22 @@
+.recheck{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    position: absolute;
+    z-index: 2100;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(0, 0, 0, .125);
+    box-shadow: 0 2px 0 rgba(90, 97, 105, .11), 0 4px 8px rgba(90, 97, 105, .12), 0 10px 10px rgba(90, 97, 105, .06), 0 7px 70px rgba(90, 97, 105, .1);
+    padding: 10px;
+    border-radius: 8px;
+    justify-content: flex-start;
+    margin: 15px;
+    background-color: #ffffff;
+}
+.recheck-groupbutton{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}

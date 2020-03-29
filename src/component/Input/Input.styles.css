@@ -1,0 +1,21 @@
+.form-group{
+    display: flex;
+    margin: 30px;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    position: relative;
+}
+.label{
+    font-size: 15px;
+    font-family: Georgia, sans-serif;
+    text-align: center;
+    text-transform: none;
+    color: #32435f
+}
+.form-control{
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+}
