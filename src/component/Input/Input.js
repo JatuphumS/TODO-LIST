@@ -8,7 +8,7 @@ const Input = ({ type, getValid, label, value, handleChange, id }) => {
         <Form.Group className='form-group'>
             <Form.Label className='label'>{label}</Form.Label>
             <Form.Control
-                className='form-control'
+                className={`form-control ${getValid ? 'trueValid' : 'falseValid'}`}
                 isInvalid={!getValid}
                 value={value}
                 type={type}

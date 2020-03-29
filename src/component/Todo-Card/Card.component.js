@@ -6,11 +6,13 @@ import './Card.styles.css'
 const Card = ({ title, description, index, onClicked, deleted, id }) => {
     return (
         <div className='Card' >
-            <Button className='icon' onClick={() => deleted(id)}>x</Button>
-            <h2 className='card-title'>{title}</h2>
-            <span className='card-span'>
-                <p className='card-decription'>{description}</p>
-            </span>
+            <div className='card-details' onClick={() => onClicked({title,description},index,id)}>
+                <h2 className='card-title'>{title ? title:'Untitle'}</h2>
+                    <p className='card-decription'>{description}</p>
+            </div>
+            <Button className='icon' onClick={() => deleted(id,title)}>
+            <i className="material-icons">delete_forever</i>
+            </Button>
         </div>
     )
 }

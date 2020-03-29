@@ -7,13 +7,16 @@
     background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, .125);
     box-shadow: 0 2px 0 rgba(90, 97, 105, .11), 0 4px 8px rgba(90, 97, 105, .12), 0 10px 10px rgba(90, 97, 105, .06), 0 7px 70px rgba(90, 97, 105, .1);
-    width:700px;
-    height: 450px;
+    width:450px;
+    height: 300px;
     flex-direction: column;
     position: absolute;
     left: 50%;
     top:40%;
     transform: translate(-50%,-50%);
+    text-align: center;
+
+    font-family: 'Open Sans', sans-serif;
 }
 
 .login-header{
@@ -24,26 +27,27 @@
 .btn-login{
     border: 1px solid transparent;
     border-radius: 10px;
-    font-size: 15px;
-    font-family: 'Calistoga', cursive;
-    font-weight: 500;
+    font-size: 15px;    
+    font-weight: 600;
     text-align: center;
     text-transform: capitalize;
     letter-spacing: 2px;
     color: #ffff;
-    color: rgb(0, 0, 0);
-    background-color: #ffffff;
+    background-color: #6ed5c0;
     border-color: black;
     width: 150px;
     height: 40px;
-    cursor: pointer;
     position: absolute;
     left: 50%;
-    bottom :30%;
+    bottom :0%;
     transform: translate(-50%,-50%);
 }
 .btn-login:hover{
-    border-color: black;
-    background-color: #000000;
-    color: #ffffff;
+    border: 2px solid #000000;
+    font-size: 20px;
+}
+.form-login{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }

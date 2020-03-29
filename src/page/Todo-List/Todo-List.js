@@ -18,7 +18,8 @@ const config_card = {
         type: 'text',
         value: '',
         label: 'Title',
-        valid: {
+        valid: false,
+        validation: {
             isRequire: true
         }
     },
@@ -26,9 +27,7 @@ const config_card = {
         type: 'text',
         value: '',
         label: 'Description',
-        valid: {
-            isRequire: true
-        }
+        valid: true
     }
 }
 
@@ -67,8 +66,34 @@ const deleteCard = async (id) => {
         },
     }
     const res = await axios(option)
-    console.log(res)
+    return res.status
 }
+
+const putCard = async (id, todo) => {
+    const option = {
+        url: `https://candidate.neversitup.com/todo/todos/${id}`,
+        method: 'put',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': `application/json`
+        },
+        data: todo
+    }
+    const res = await axios(option)
+    return res.status
+}
+
+const validation = (value, rules) => {
+    let isValid = true;
+    if (!rules) {
+        return true
+    }
+    if (rules.isRequire) {
+        isValid = value.trim() !== '' && isValid
+    }
+    return isValid
+}
+
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState([])
     const [configCard, setConfigCard] = useState(config_card)
@@ -77,9 +102,8 @@ const ToDoList = () => {
     const [index, setIndex] = useState(null)
     const [showModalDelete, setShowModalDelete] = useState(false)
     const [cardDelete, setCardDelete] = useState(null)
-    const [connect, setConnect] = useState(false)
-
-
+    const [cardID, setCardID] = useState(null)
+    const [title, setTitle] = useState(null)
 
     useEffect(async () => {
         console.log('connect')
@@ -88,7 +112,7 @@ const ToDoList = () => {
         setTodoTitle(res_todo)
 
     }, [])
-    
+
 
 
     const onCreateChnageHandler = (event, identifier) => {
@@ -96,8 +120,9 @@ const ToDoList = () => {
         const updateElement = { ...configCard[identifier] }
 
         updateElement.value = event.target.value
-        updateConfig[identifier] = updateElement
+        updateElement.valid = validation(updateElement.value, updateElement.validation)
 
+        updateConfig[identifier] = updateElement
         setConfigCard(updateConfig)
     }
 
@@ -107,29 +132,57 @@ const ToDoList = () => {
         for (let key in card) {
             fomrCard[key] = card[key].value
         }
-        const body = JSON.stringify(fomrCard)
-        const res_post = await postTodoList(body)
 
-        const res_todo = await getTodoList()
-        setTodoTitle(res_todo)
+        const body = JSON.stringify(fomrCard)
+
+        const res_post = await postTodoList(body)
+        if (res_post === 200) {
+            const res_todo = await getTodoList()
+            setTodoTitle(res_todo)
+        }
+
         setShowCrate(false)
-        
+
+    }
+    const editCard = async () => {
+        const card = { ...configCard }
+        const fomrCard = {}
+        for (let key in card) {
+            fomrCard[key] = card[key].value
+        }
+
+        const body = JSON.stringify(fomrCard)
+        const card_id = cardID
+
+        const res_post = await putCard(cardID, body)
+        if (res_post === 200) {
+            const res_todo = await getTodoList()
+            setTodoTitle(res_todo)
+        }
+        setShowCrate(false)
+
     }
 
-    const editCardHadler = (card, index) => {
+    const editCardHadler = (card, index, id) => {
         const updateCard = { ...configCard }
 
         for (let key in updateCard) {
             updateCard[key].value = card[key]
         }
-        console.log(config_card)
 
+        setTitle(card.title)
         setConfigCard(updateCard)
         setShowCrate(true)
         setNewCard(false)
+        setCardID(id)
     }
     const showCreatCardHandler = () => {
-        setConfigCard(config_card)
+        
+        const newConfig = { ...config_card }
+        for (let key in newConfig) {
+            newConfig[key].value = ''
+        }
+        setConfigCard(newConfig)
         setShowCrate(true)
         setNewCard(true)
 
@@ -139,7 +192,8 @@ const ToDoList = () => {
     }
 
 
-    const showModalDeleteHandler = (id) => {
+    const showModalDeleteHandler = (id, title) => {
+        setTitle(title)
         setShowModalDelete(true)
         setCardDelete(id)
     }
@@ -149,7 +203,10 @@ const ToDoList = () => {
     const confirmDeleteCardHandler = async () => {
         const id_Card = cardDelete
         const res = await deleteCard(id_Card)
-        console.log(res)
+        if (res === 200) {
+            const res_todo = await getTodoList()
+            setTodoTitle(res_todo)
+        }
         setShowModalDelete(false)
     }
 
@@ -167,18 +224,21 @@ const ToDoList = () => {
                             id={_id}
                             deleted={showModalDeleteHandler}
                             description={description} />)
-                        : <p>Empty press 'CREATE' for add new todo</p>
+                        : <h2 className=''>Empty press 'CREATE' for add new todo</h2>
                 }
             </div>}
             {
                 showCreate ? <CreateCard
+                    title={title}
                     newCard={newCard}
                     cancel={closeCreatCardHandler}
+                    edited={editCard}
                     create={createCardHandler}
                     config={configCard}
                     handleChange={onCreateChnageHandler} /> : null
             }
             {showModalDelete ? <ModalDelete
+                title={title}
                 confirm={confirmDeleteCardHandler}
                 cancel={closeModalDeleteHandler} /> : null}
             <Button className='btn-create' onClick={showCreatCardHandler}>Create</Button>

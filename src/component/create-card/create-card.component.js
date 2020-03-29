@@ -21,20 +21,24 @@ const createCard = ({ config, handleChange, cancel, create, newCard, edited }) =
         <Aux>
             <BackDrop show />
             <div className='create-card'>
+                <h2 style={{
+                    borderBottom: `2.5px dashed #E1DCD9`
+                }}>{newCard ? 'Create new Card' : 'Edit Card'}</h2>
                 <div className='list-card'>
-                    {elementInput.map(({ id, type, value, label, }) =>
+                    {elementInput.map(({ id, type, value, label,valid }) =>
                         <Input
                             id={id}
                             type={type}
                             value={value}
                             label={label}
+                            getValid={true}
                             handleChange={(event) => handleChange(event, id)} />)
                     }
                 </div>
                 <div className='buttonGroup'>
                     <Button className='btn cancel' onClick={cancel}>Cancel</Button>
                     <Button className='btn create'
-                        onClick={create}>{newCard ? 'CREATE' : 'EDIT'}</Button>
+                        onClick={newCard ? create : edited}>{newCard ? 'CREATE' : 'EDIT'}</Button>
 
                 </div>
             </div>

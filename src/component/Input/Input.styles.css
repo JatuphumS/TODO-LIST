@@ -1,21 +1,27 @@
 .form-group{
     display: flex;
-    margin: 30px;
-    align-items: flex-start;
+    margin: 15px;
+    align-items: center;
     flex-direction: row;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     position: relative;
 }
 .label{
     font-size: 15px;
-    font-family: Georgia, sans-serif;
     text-align: center;
     text-transform: none;
     color: #32435f
 }
 .form-control{
-    width: 200px;
-    height: 30px;
+    text-align: center;
+    width: 220px;
+    height: 40px;
     border-radius: 5px;
+}
+.falseValid{
+    border-color: red;
+}
+.trueValid{
+    border-color: blue;
 }

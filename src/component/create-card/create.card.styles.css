@@ -1,7 +1,7 @@
 .create-card{
     display: flex;
     flex-direction: column;
-    width: 800px;
+    width: 500px;
     position: absolute;
     z-index: 2100;
     left: 50%;
@@ -39,9 +39,7 @@
 }
 
 .create{
-    color: rgb(0, 0, 0);
-    background-color: #ffffff;
-    border-color: black;
+    background-color: #6ed5c0;
     width: 150px;
 }
 
@@ -50,4 +48,13 @@
     background-color: #ffffff;
     border-color: black;
     width: 100px;
+}
+.create:hover{
+    border: 2px solid #000000;
+    color: #ffffff;
+    font-size: 20px;
+}
+.cancel:hover{
+    background-color: #000000;
+    color: #ffffff;
 }
