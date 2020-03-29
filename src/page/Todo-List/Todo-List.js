@@ -106,8 +106,6 @@ const ToDoList = () => {
     const [title, setTitle] = useState(null)
 
     useEffect(async () => {
-        console.log('connect')
-
         const res_todo = await getTodoList()
         setTodoTitle(res_todo)
 

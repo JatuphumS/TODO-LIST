@@ -19,6 +19,13 @@ class App extends React.Component {
         token: token
       }, () => this.props.history.push('/todolist'))
     }
+
+    const array1 = [1, 2, 3, 4, 5]
+    const array2 = [2, 5, 1]
+    const bonus = array1.filter(idx => array2.find(value => value === idx))
+    console.log('ARRAY 1', array1)
+    console.log('ARRAY 2', array2)
+    console.log(bonus)
   }
 
   authServer = async (user) => {
